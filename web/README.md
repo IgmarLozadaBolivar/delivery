@@ -58,7 +58,6 @@ web/
 ## 5. Configuración
 
 - La URL de la API se configura en `src/lib/api.ts`. Por defecto apunta a `http://localhost:8000/api`.
-- Para producción, ajusta la URL según el entorno de despliegue.
 
 ---
 
@@ -88,8 +87,6 @@ web/
 
 - **Login:**  
   POST a `/api/users/login` con `{ email, password }`.
-- **Registro:**  
-  POST a `/api/users/register` con los datos del usuario.
 
 Las respuestas se gestionan en los componentes Vue y se almacenan en el estado local.
 
@@ -97,15 +94,7 @@ Las respuestas se gestionan en los componentes Vue y se almacenan en el estado l
 
 ## 9. Despliegue
 
-1. Compila el proyecto:
-   ```sh
-   npm run build
-   ```
-2. Previsualiza la build:
-   ```sh
-   npm run preview
-   ```
-3. Sube el contenido de `./dist` a tu servidor o plataforma de hosting.
+Este proyecto no fue testeado o procesado para uso comercial ni despliegues, sino ejecución local.
 
 ---
 
