@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FormWrapper from "../../components/forms/FormWrapper.astro";
+import LoginForm from "../../components/forms/LoginForm.vue";
+---
+
+<BaseLayout titleDoc="Iniciar sesión">
+    <header class="flex gap-3 items-center px-4 py-2">
+        <a href="/" class="flex items-center gap-2">
+            <div class="size-16 overflow-hidden">
+                <img src="/smile.svg" alt="logo" class="w-full object-cover" />
+            </div>
+            <h1
+                class="text-3xl font-bold tracking-tight font-[Work_Sans] text-blue-500/90"
+            >
+                SmileGo
+            </h1>
+        </a>
+    </header>
+
+    <main
+        class="flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 font-[Work_Sans]"
+    >
+        <div class="w-full max-w-sm animate-slide-up">
+            <FormWrapper
+                title="Inicia sesión"
+                paragraph="Todo está en tu plataforma de entregas."
+                buttonText="Iniciar sesión"
+            >
+                <LoginForm text="Iniciar sesión" client:load />
+            </FormWrapper>
+        </div>
+    </main>
+
+    <footer class="text-center text-sm text-slate-500 font-[Work_Sans]">
+        © 2025 Delivery. Todos los derechos reservados.
+    </footer>
+</BaseLayout>
