@@ -141,7 +141,6 @@ Aplicación web desarrollada con **Astro**, **Vue 3** y **TailwindCSS**. Permite
 ### Referencia de API
 
 - **Login:** POST a `/api/users/login` con `{ email, password }`.
-- **Registro:** POST a `/api/users/register` con los datos del usuario.
 
 ---
 
