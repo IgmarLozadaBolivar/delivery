@@ -1,0 +1,668 @@
+openapi: 3.1.0
+info:
+  title: Swagger Delivery - OpenAPI 3.0
+  description: Documentación de Endpoints a nuestra aplicación para gestionar paquetes, camiones, camioneros y demás detalles.
+  version: 1.0.0
+  contact:
+    email: losadabolivar@gmail.com
+servers:
+  - url: 'http://localhost:8000'
+paths:
+  /api/tipos_mercancias:
+    get:
+      summary: Listar tipos de mercancías
+      tags: [Tipos de Mercancías]
+      operationId: getTiposMercancias
+      responses:
+        '200':
+          description: Listado de tipos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipoMercancia'
+    post:
+      summary: Crear un tipo de mercancía
+      tags: [Tipos de Mercancías]
+      operationId: createTipoMercancia
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoMercancia'
+      responses:
+        '201':
+          description: Tipo creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TipoMercancia'
+  /api/tipos_mercancias/{id}:
+    get:
+      summary: Obtener detalle de un tipo de mercancía
+      tags: [Tipos de Mercancías]
+      operationId: getTipoMercanciaById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalle del tipo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TipoMercancia'
+        '404':
+          description: No encontrado
+    put:
+      summary: Actualizar un tipo de mercancía
+      tags: [Tipos de Mercancías]
+      operationId: updateTipoMercanciaById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TipoMercancia'
+      responses:
+        '200':
+          description: Tipo actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TipoMercancia'
+        '404':
+          description: No encontrado
+    delete:
+      summary: Eliminar un tipo de mercancía
+      tags: [Tipos de Mercancías]
+      operationId: deleteTipoMercanciaById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Eliminado exitosamente
+        '404':
+          description: No encontrado
+  /api/estados_paquetes:
+    get:
+      summary: Listar todos los estados de un paquete
+      tags: [Estados de un Paquete]
+      operationId: getEstadosPaquetes
+      responses:
+        '200':
+          description: Listado de estados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstadoPaquete'
+    post:
+      summary: Crear un nuevo estado de paquete
+      tags: [Estados de un Paquete]
+      operationId: createEstadoPaquete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstadoPaquete'
+      responses:
+        '201':
+          description: Estado creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstadoPaquete'
+  /api/estados_paquetes/{id}:
+    get:
+      summary: Obtener detalles del estado
+      tags: [Estados de un Paquete]
+      operationId: getEstadoPaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del estado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstadoPaquete'
+        '404':
+          description: No encontrado
+    put:
+      summary: Actualizar estado
+      tags: [Estados de un Paquete]
+      operationId: updateEstadoPaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstadoPaquete'
+      responses:
+        '200':
+          description: Estado actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstadoPaquete'
+        '404':
+          description: No encontrado
+    delete:
+      summary: Eliminar estado
+      tags: [Estados de un Paquete]
+      operationId: deleteEstadoPaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Estado eliminado
+        '404':
+          description: No encontrado
+  /api/camiones:
+    get:
+      summary: Listar todos los camiones
+      tags: [Camiones]
+      operationId: getCamiones
+      responses:
+        '200':
+          description: Listado de camiones
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camion'
+    post:
+      summary: Registrar un nuevo camión
+      tags: [Camiones]
+      operationId: createCamion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Camion'
+      responses:
+        '201':
+          description: Camión registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camion'
+  /api/camiones/{id}:
+    get:
+      summary: Detalles del camión
+      tags: [Camiones]
+      operationId: getCamionById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del camión
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camion'
+        '404':
+          description: No encontrado
+    put:
+      summary: Actualizar información del camión
+      tags: [Camiones]
+      operationId: updateCamionById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Camion'
+      responses:
+        '201':
+          description: Camión actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camion'
+        '404':
+          description: No encontrado
+    delete:
+      summary: Eliminar camión
+      tags: [Camiones]
+      operationId: deleteCamionById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Camión eliminado exitosamente
+        '404':
+          description: No encontrado
+  /api/camioneros:
+    get:
+      summary: Listar todos los camioneros
+      tags: [Camioneros]
+      operationId: getCamioneros
+      responses:
+        '200':
+          description: Listado de camioneros
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camionero'
+    post:
+      summary: Registrar un nuevo camionero
+      tags: [Camioneros]
+      operationId: createCamionero
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Camionero'
+      responses:
+        '200':
+          description: Camionero registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camionero'
+  /api/camioneros/{id}:
+    get:
+      summary: Obtener información de un camionero
+      tags: [Camioneros]
+      operationId: getCamioneroById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Información del camionero
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camionero'
+        '404':
+          description: No encontrado
+    put:
+      summary: Actualizar información del camionero
+      tags: [Camioneros]
+      operationId: updateCamioneroById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Camionero'
+      responses:
+        '201':
+          description: Camionero actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Camionero'
+        '404':
+          description: No encontrado
+    delete:
+      summary: Eliminar camionero
+      tags: [Camioneros]
+      operationId: deleteCamioneroById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Camionero eliminado exitosamente
+        '404':
+          description: No encontrado
+  /api/paquetes:
+    get:
+      summary: Listar todos los paquetes
+      tags: [Paquetes]
+      operationId: getPaquetes
+      responses:
+        '200':
+          description: Listado de paquetes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paquete'
+    post:
+      summary: Registrar un nuevo paquete
+      tags: [Paquetes]
+      operationId: createPaquete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Paquete'
+      responses:
+        '200':
+          description: Paquete registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paquete'
+  /api/paquetes/{id}:
+    get:
+      summary: Detalles del paquete
+      tags: [Paquetes]
+      operationId: getPaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del paquete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paquete'
+        '404':
+          description: No encontrado
+    put:
+      summary: Actualizar detalles del paquete
+      tags: [Paquetes]
+      operationId: updatePaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Paquete'
+      responses:
+        '201':
+          description: Paquete actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Paquete'
+        '404':
+          description: No encontrado
+    delete:
+      summary: Eliminar un paquete
+      tags: [Paquetes]
+      operationId: deletePaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Paquete eliminado exitosamente
+        '404':
+          description: No encontrado
+  /api/detalles_paquetes:
+    get:
+      summary: Listar los detalles de un paquete
+      tags: [Detalles de Paquete]
+      operationId: getDetallesPaquetes
+      responses:
+        '200':
+          description: Listado de detalles de un paquete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetallePaquete'
+    post:
+      summary: Registrar detalles de un paquete
+      tags: [Detalles de Paquete]
+      operationId: createDetallePaquete
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetallePaquete'
+      responses:
+        '200':
+          description: Detalles del paquete registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetallePaquete'
+  /api/detalles_paquetes/{id}:
+    get:
+      summary: Obtener detalles del paquete
+      tags: [Detalles de Paquete]
+      operationId: getDetallePaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del paquete específico
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetallePaquete'
+        '404':
+          description: No encontrado
+    put:
+      summary: Actualizar detalles de un paquete
+      tags: [Detalles de Paquete]
+      operationId: updateDetallePaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetallePaquete'
+      responses:
+        '201':
+          description: Detalles actualizados exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetallePaquete'
+        '404':
+          description: No encontrado
+    delete:
+      summary: Eliminar un paquete
+      tags: [Detalles de Paquete]
+      operationId: deleteDetallePaqueteById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles eliminados exitosamente
+        '404':
+          description: No encontrado
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    TipoMercancia:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        tipo:
+          type: string
+          example: Frágil
+      required:
+        - tipo
+    EstadoPaquete:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        estado:
+          type: string
+          example: Entregado
+      required:
+        - estado
+    Camion:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        placa:
+          type: string
+          example: ABC123
+        modelo:
+          type: string
+          example: VOLVO FH
+      required:
+        - placa
+        - modelo
+    Camionero:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        documento:
+          type: integer
+          example: 1234567890
+        nombre:
+          type: string
+          example: Mariana
+        apellido:
+          type: string
+          example: Zuñiga
+        fecha_nacimiento:
+          type: string
+          example: 04/09/2025
+        licencia:
+          type: string
+          example: C3
+        telefono:
+          type: integer
+          example: 0123465789
+    Paquete:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        camionero_id:
+          type: integer
+          example: 1
+        estado_id:
+          type: integer
+          example: 1
+        direccion:
+          type: string
+          example: New York City, United States
+      required:
+        - camionero_id
+        - estado_id
+        - direccion
+    DetallePaquete:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        paquete_id:
+          type: integer
+          example: 1
+        tipo_mercancia_id:
+          type: integer
+          example: 1
+        dimension:
+          type: string
+          example: 20x20
+        peso:
+          type: string
+          example: 40kg
+        fecha_entrega:
+          type: string
+          example: 04/09/2025
+      required:
+        - paquete_id
+        - tipo_mercancia_id
+        - dimension
+        - peso
+        - fecha_entrega
+security:
+  - bearerAuth: []

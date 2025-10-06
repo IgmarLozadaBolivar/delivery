@@ -1,0 +1,3 @@
+apis:
+  delivery_api.yaml:
+    alias: "swagger-delivery-openapi-3.0"

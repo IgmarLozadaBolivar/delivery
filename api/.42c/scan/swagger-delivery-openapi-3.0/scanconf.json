@@ -1,0 +1,1320 @@
+{
+	"version": "2.0.0",
+	"runtimeConfiguration": {
+		"environment": "default",
+		"laxTestingModeEnabled": false,
+		"apiConnectivityCheck": true,
+		"logLevel": "error",
+		"logDestination": "stdout+platform",
+		"logMaxFileSize": 2147483648,
+		"requestHeaderNameRequestId": "x-scan-request-id",
+		"requestHeaderNameScenarioId": "x-scan-scenario-id",
+		"requestHeaderNameRequestType": "x-scan-request-type",
+		"requestFlowrate": 100,
+		"requestTimeout": 30,
+		"requestTlsInsecureSkipVerify": true,
+		"responseFollowRedirection": false,
+		"responseMaxBodySizeScan": 10485760,
+		"happyPathOnly": false,
+		"maxRequestRetryAttempts": 5,
+		"maxScanDuration": 1800,
+		"memoryLimit": 2147483648,
+		"memoryTimeSpan": 10,
+		"reportMaxRequestSizeHappyPath": 8092,
+		"reportMaxRequestSizeTest": 8092,
+		"reportIncludeRequestBody": true,
+		"reportIncludeResponseBody": true,
+		"reportMaxHttpResponseSizeHappyPath": 8092,
+		"reportMaxBodySizeHappyPath": 8092,
+		"reportMaxHttpResponseSizeTest": 8092,
+		"reportMaxBodySizeTest": 8092,
+		"reportIssuesOnly": false,
+		"reportMaxIssues": 1000,
+		"reportMaxSize": 20971520,
+		"reportGenerateCurlCommand": true,
+		"normalizeServerUrls": true
+	},
+	"customizations": {
+		"happyPaths": {
+			"retry": 1,
+			"responsePolicy": {
+				"httpStatusExpected": true,
+				"mustBeConformant": true
+			},
+			"httpStatusExpected": [ ]
+		},
+		"tests": {
+			"responsePolicy": {
+				"httpStatusExpected": true,
+				"mustBeConformant": true
+			}
+		}
+	},
+	"environments": {
+		"default": {
+			"variables": {
+				"bearerAuth": {
+					"name": "SCAN42C_SECURITY_BEARERAUTH",
+					"from": "environment",
+					"required": true
+				},
+				"host": {
+					"name": "SCAN42C_HOST",
+					"from": "environment",
+					"required": false,
+					"default": "http://localhost:8000"
+				}
+			}
+		}
+	},
+	"operations": {
+		"createCamion": {
+			"operationId": "createCamion",
+			"request": {
+				"operationId": "createCamion",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "createCamion",
+						"method": "POST",
+						"url": "{{host}}/api/camiones",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"modelo": "VOLVO FH",
+								"placa": "ABC123"
+							}
+						}
+					}
+				},
+				"defaultResponse": "201",
+				"responses": {
+					"201": {
+						"expectations": {
+							"httpStatus": 201
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/createCamion/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"createCamionero": {
+			"operationId": "createCamionero",
+			"request": {
+				"operationId": "createCamionero",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "createCamionero",
+						"method": "POST",
+						"url": "{{host}}/api/camioneros",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"apellido": "Zuñiga",
+								"documento": 1234567890,
+								"fecha_nacimiento": "04/09/2025",
+								"licencia": "C3",
+								"nombre": "Mariana",
+								"telefono": 2624323551851789300
+							}
+						}
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/createCamionero/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"createDetallePaquete": {
+			"operationId": "createDetallePaquete",
+			"request": {
+				"operationId": "createDetallePaquete",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "createDetallePaquete",
+						"method": "POST",
+						"url": "{{host}}/api/detalles_paquetes",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"dimension": "20x20",
+								"fecha_entrega": "04/09/2025",
+								"paquete_id": 1,
+								"peso": "40kg",
+								"tipo_mercancia_id": 1
+							}
+						}
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/createDetallePaquete/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"createEstadoPaquete": {
+			"operationId": "createEstadoPaquete",
+			"request": {
+				"operationId": "createEstadoPaquete",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "createEstadoPaquete",
+						"method": "POST",
+						"url": "{{host}}/api/estados_paquetes",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"estado": "Entregado"
+							}
+						}
+					}
+				},
+				"defaultResponse": "201",
+				"responses": {
+					"201": {
+						"expectations": {
+							"httpStatus": 201
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/createEstadoPaquete/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"createPaquete": {
+			"operationId": "createPaquete",
+			"request": {
+				"operationId": "createPaquete",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "createPaquete",
+						"method": "POST",
+						"url": "{{host}}/api/paquetes",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"camionero_id": 1,
+								"direccion": "New York City, United States",
+								"estado_id": 1
+							}
+						}
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/createPaquete/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"createTipoMercancia": {
+			"operationId": "createTipoMercancia",
+			"request": {
+				"operationId": "createTipoMercancia",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "createTipoMercancia",
+						"method": "POST",
+						"url": "{{host}}/api/tipos_mercancias",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"tipo": "Frágil"
+							}
+						}
+					}
+				},
+				"defaultResponse": "201",
+				"responses": {
+					"201": {
+						"expectations": {
+							"httpStatus": 201
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/createTipoMercancia/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"deleteCamionById": {
+			"operationId": "deleteCamionById",
+			"request": {
+				"operationId": "deleteCamionById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "deleteCamionById",
+						"method": "DELETE",
+						"url": "{{host}}/api/camiones/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 1624798710923746800
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/deleteCamionById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"deleteCamioneroById": {
+			"operationId": "deleteCamioneroById",
+			"request": {
+				"operationId": "deleteCamioneroById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "deleteCamioneroById",
+						"method": "DELETE",
+						"url": "{{host}}/api/camioneros/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 7841101754947552000
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/deleteCamioneroById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"deleteDetallePaqueteById": {
+			"operationId": "deleteDetallePaqueteById",
+			"request": {
+				"operationId": "deleteDetallePaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "deleteDetallePaqueteById",
+						"method": "DELETE",
+						"url": "{{host}}/api/detalles_paquetes/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 543971682306212500
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/deleteDetallePaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"deleteEstadoPaqueteById": {
+			"operationId": "deleteEstadoPaqueteById",
+			"request": {
+				"operationId": "deleteEstadoPaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "deleteEstadoPaqueteById",
+						"method": "DELETE",
+						"url": "{{host}}/api/estados_paquetes/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 1337791503030446800
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/deleteEstadoPaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"deletePaqueteById": {
+			"operationId": "deletePaqueteById",
+			"request": {
+				"operationId": "deletePaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "deletePaqueteById",
+						"method": "DELETE",
+						"url": "{{host}}/api/paquetes/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 4490208407716803000
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/deletePaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"deleteTipoMercanciaById": {
+			"operationId": "deleteTipoMercanciaById",
+			"request": {
+				"operationId": "deleteTipoMercanciaById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "deleteTipoMercanciaById",
+						"method": "DELETE",
+						"url": "{{host}}/api/tipos_mercancias/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 5181738734089825000
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/deleteTipoMercanciaById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getCamionById": {
+			"operationId": "getCamionById",
+			"request": {
+				"operationId": "getCamionById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getCamionById",
+						"method": "GET",
+						"url": "{{host}}/api/camiones/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 3348416443965652000
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getCamionById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getCamioneroById": {
+			"operationId": "getCamioneroById",
+			"request": {
+				"operationId": "getCamioneroById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getCamioneroById",
+						"method": "GET",
+						"url": "{{host}}/api/camioneros/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 3232034960747557400
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getCamioneroById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getCamioneros": {
+			"operationId": "getCamioneros",
+			"request": {
+				"operationId": "getCamioneros",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getCamioneros",
+						"method": "GET",
+						"url": "{{host}}/api/camioneros"
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getCamioneros/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getCamiones": {
+			"operationId": "getCamiones",
+			"request": {
+				"operationId": "getCamiones",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getCamiones",
+						"method": "GET",
+						"url": "{{host}}/api/camiones"
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getCamiones/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getDetallePaqueteById": {
+			"operationId": "getDetallePaqueteById",
+			"request": {
+				"operationId": "getDetallePaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getDetallePaqueteById",
+						"method": "GET",
+						"url": "{{host}}/api/detalles_paquetes/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 781755825973278500
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getDetallePaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getDetallesPaquetes": {
+			"operationId": "getDetallesPaquetes",
+			"request": {
+				"operationId": "getDetallesPaquetes",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getDetallesPaquetes",
+						"method": "GET",
+						"url": "{{host}}/api/detalles_paquetes"
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getDetallesPaquetes/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getEstadoPaqueteById": {
+			"operationId": "getEstadoPaqueteById",
+			"request": {
+				"operationId": "getEstadoPaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getEstadoPaqueteById",
+						"method": "GET",
+						"url": "{{host}}/api/estados_paquetes/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 4953907375378807000
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getEstadoPaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getEstadosPaquetes": {
+			"operationId": "getEstadosPaquetes",
+			"request": {
+				"operationId": "getEstadosPaquetes",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getEstadosPaquetes",
+						"method": "GET",
+						"url": "{{host}}/api/estados_paquetes"
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getEstadosPaquetes/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getPaqueteById": {
+			"operationId": "getPaqueteById",
+			"request": {
+				"operationId": "getPaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getPaqueteById",
+						"method": "GET",
+						"url": "{{host}}/api/paquetes/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 8210932401544881000
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getPaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getPaquetes": {
+			"operationId": "getPaquetes",
+			"request": {
+				"operationId": "getPaquetes",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getPaquetes",
+						"method": "GET",
+						"url": "{{host}}/api/paquetes"
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getPaquetes/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getTipoMercanciaById": {
+			"operationId": "getTipoMercanciaById",
+			"request": {
+				"operationId": "getTipoMercanciaById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getTipoMercanciaById",
+						"method": "GET",
+						"url": "{{host}}/api/tipos_mercancias/{id}",
+						"paths": [ {
+							"key": "id",
+							"value": 3721231893901946000
+						} ]
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getTipoMercanciaById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"getTiposMercancias": {
+			"operationId": "getTiposMercancias",
+			"request": {
+				"operationId": "getTiposMercancias",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "getTiposMercancias",
+						"method": "GET",
+						"url": "{{host}}/api/tipos_mercancias"
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/getTiposMercancias/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"updateCamionById": {
+			"operationId": "updateCamionById",
+			"request": {
+				"operationId": "updateCamionById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "updateCamionById",
+						"method": "PUT",
+						"url": "{{host}}/api/camiones/{id}",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"paths": [ {
+							"key": "id",
+							"value": 7619474003523127000
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"modelo": "VOLVO FH",
+								"placa": "ABC123"
+							}
+						}
+					}
+				},
+				"defaultResponse": "201",
+				"responses": {
+					"201": {
+						"expectations": {
+							"httpStatus": 201
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/updateCamionById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"updateCamioneroById": {
+			"operationId": "updateCamioneroById",
+			"request": {
+				"operationId": "updateCamioneroById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "updateCamioneroById",
+						"method": "PUT",
+						"url": "{{host}}/api/camioneros/{id}",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"paths": [ {
+							"key": "id",
+							"value": 105999964633447580
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"apellido": "Zuñiga",
+								"documento": 1234567890,
+								"fecha_nacimiento": "04/09/2025",
+								"licencia": "C3",
+								"nombre": "Mariana",
+								"telefono": 5920852886796172000
+							}
+						}
+					}
+				},
+				"defaultResponse": "201",
+				"responses": {
+					"201": {
+						"expectations": {
+							"httpStatus": 201
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/updateCamioneroById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"updateDetallePaqueteById": {
+			"operationId": "updateDetallePaqueteById",
+			"request": {
+				"operationId": "updateDetallePaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "updateDetallePaqueteById",
+						"method": "PUT",
+						"url": "{{host}}/api/detalles_paquetes/{id}",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"paths": [ {
+							"key": "id",
+							"value": 8015592807112094000
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"dimension": "20x20",
+								"fecha_entrega": "04/09/2025",
+								"paquete_id": 1,
+								"peso": "40kg",
+								"tipo_mercancia_id": 1
+							}
+						}
+					}
+				},
+				"defaultResponse": "201",
+				"responses": {
+					"201": {
+						"expectations": {
+							"httpStatus": 201
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/updateDetallePaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"updateEstadoPaqueteById": {
+			"operationId": "updateEstadoPaqueteById",
+			"request": {
+				"operationId": "updateEstadoPaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "updateEstadoPaqueteById",
+						"method": "PUT",
+						"url": "{{host}}/api/estados_paquetes/{id}",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"paths": [ {
+							"key": "id",
+							"value": 7063929916207688000
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"estado": "Entregado"
+							}
+						}
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/updateEstadoPaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"updatePaqueteById": {
+			"operationId": "updatePaqueteById",
+			"request": {
+				"operationId": "updatePaqueteById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "updatePaqueteById",
+						"method": "PUT",
+						"url": "{{host}}/api/paquetes/{id}",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"paths": [ {
+							"key": "id",
+							"value": 248646039055985150
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"camionero_id": 1,
+								"direccion": "New York City, United States",
+								"estado_id": 1
+							}
+						}
+					}
+				},
+				"defaultResponse": "201",
+				"responses": {
+					"201": {
+						"expectations": {
+							"httpStatus": 201
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/updatePaqueteById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		},
+		"updateTipoMercanciaById": {
+			"operationId": "updateTipoMercanciaById",
+			"request": {
+				"operationId": "updateTipoMercanciaById",
+				"auth": [ "bearerAuth" ],
+				"request": {
+					"type": "42c",
+					"details": {
+						"operationId": "updateTipoMercanciaById",
+						"method": "PUT",
+						"url": "{{host}}/api/tipos_mercancias/{id}",
+						"headers": [ {
+							"key": "Content-Type",
+							"value": "application/json"
+						} ],
+						"paths": [ {
+							"key": "id",
+							"value": 8756893161040566000
+						} ],
+						"requestBody": {
+							"mode": "json",
+							"json": {
+								"tipo": "Frágil"
+							}
+						}
+					}
+				},
+				"defaultResponse": "200",
+				"responses": {
+					"200": {
+						"expectations": {
+							"httpStatus": 200
+						}
+					},
+					"404": {
+						"expectations": {
+							"httpStatus": 404
+						}
+					}
+				}
+			},
+			"scenarios": [ {
+				"key": "happy.path",
+				"requests": [ {
+					"fuzzing": true,
+					"$ref": "#/operations/updateTipoMercanciaById/request"
+				} ],
+				"fuzzing": true
+			} ]
+		}
+	},
+	"authenticationDetails": [ {
+		"bearerAuth": {
+			"type": "bearer",
+			"default": "bearerAuth",
+			"credentials": {
+				"bearerAuth": {
+					"credential": "{{bearerAuth}}",
+					"description": "bearerAuth security"
+				}
+			}
+		}
+	} ]
+}
