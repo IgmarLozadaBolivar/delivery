@@ -96,7 +96,12 @@ curl -X GET http://localhost:8000/api/paquetes
 
 ## Testing
 
-- Ejecuta pruebas con PHPUnit:
+- Ejecuta inicialmente el siguiente comando, antes de testear la api:
+  ```sh
+  php artisan migrate:fresh --seed
+  ```
+Sabemos que lo ideal es que el metodo a testear, trate de crear datos desde allí y no utilizar datos de la base de datos.
+- Cuando termines con lo anterior ejecuta pruebas con PHPUnit:
   ```sh
   php artisan test
   ```
